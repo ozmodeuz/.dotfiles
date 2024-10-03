@@ -1,0 +1,28 @@
+#panel .panel-button {
+    color: #934b81 !important;
+  }
+  
+  #dash .dash-item-container .show-apps .overview-icon {
+    color: #934b81 !important;
+  }
+  
+  #dash .dash-item-container .app-grid-running-dot {
+    background-color: #934b81 !important;
+  }
+  
+  .quick-toggle:checked, .quick-toggle-arrow:checked {
+    background-color: #934b81 !important;
+  }
+  
+  .slider {
+    -barlevel-active-background-color: #934b81 !important;
+    -barlevel-active-border-color: #934b81 !important;
+  }
+  
+  #panel .panel-button#panelActivities .workspace-dot {
+    background-color: #934b81 !important;
+  }
+  
+  .calendar-day.calendar-today {
+    background-color: #934b81 !important;
+  }

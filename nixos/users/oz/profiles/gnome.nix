@@ -8,6 +8,8 @@ with lib.hm.gvariant;
     ./overlays/arcmenu.nix
   ];
 
+  home.file.".config/gnome-shell/gnome-shell-light.css".source = ./overlays/gnome-shell-light.css;
+
   home.packages = with pkgs; [
 
     # gnome extensions
