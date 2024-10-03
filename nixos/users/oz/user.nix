@@ -2,10 +2,6 @@
 
 {
 
-  imports = [
-    ./desktops/gnome/gnome.nix
-  ];
-
   home.username = "oz";
   home.homeDirectory = "/home/oz";
   home.sessionVariables = {

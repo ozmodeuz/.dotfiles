@@ -20,6 +20,7 @@
             inherit system;
             config.allowUnfree = true;
         };
+        profile = "cinnamon"; # gnome, plasma, cinnamon
     in {
         nixosConfigurations = {
             ozpc = lib.nixosSystem {
@@ -27,6 +28,7 @@
                 modules = [
                     ./hosts/ozpc/system.nix
                     ./hosts/ozpc/hardware.nix
+                    ./hosts/ozpc/profiles/${profile}.nix
                 ];
             };
             ozvm = lib.nixosSystem {
@@ -34,16 +36,20 @@
                 modules = [
                     ./hosts/ozvm/system.nix
                     ./hosts/ozvm/hardware.nix
+                    ./hosts/ozvm/profiles/${profile}.nix
                 ];
             };
         };
         homeConfigurations = {
             oz = home-manager.lib.homeManagerConfiguration {
                 inherit pkgs;
-                extraSpecialArgs = { inherit unstablePkgs; };
+                extraSpecialArgs = {
+                    inherit unstablePkgs;
+                };
                 modules = [
-                    ./users/oz/config.nix
+                    ./users/oz/user.nix
                     ./users/oz/packages.nix
+                    ./users/oz/profiles/${profile}.nix
                 ];
             };
         };

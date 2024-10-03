@@ -8,7 +8,6 @@
       eyedropper
       firefox
       git
-      gnome-extension-manager
       kitty
       micro
       nixfmt-rfc-style
@@ -16,13 +15,11 @@
       scribus
       thunderbird
       vscodium
-
-      # fonts
       ( nerdfonts.override {
         fonts = [
           "0xProto"
         ];
-      });
+      })
     ])
 
     ++

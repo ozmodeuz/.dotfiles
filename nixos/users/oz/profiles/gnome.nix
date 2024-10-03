@@ -5,12 +5,13 @@ with lib.hm.gvariant;
 {
 
   imports = [
-    ./arcmenu.nix
+    ./overlays/arcmenu.nix
   ];
 
   home.packages = with pkgs; [
 
     # gnome extensions
+    gnome-extension-manager
     gnomeExtensions.arcmenu
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-panel

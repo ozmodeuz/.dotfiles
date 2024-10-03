@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {
   # boot loader
   boot = {
@@ -51,12 +50,6 @@
     variant = "extd";
   };
   # services.xserver.libinput.enable = true;
-
-  # display managers
-  services.xserver.displayManager.gdm.enable = true;
-
-  # desktop environments
-  services.xserver.desktopManager.gnome.enable = true;
 
   # audio
   hardware.pulseaudio.enable = false;
