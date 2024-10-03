@@ -25,7 +25,7 @@
   };
 
   # networking
-  networking.hostName = "ozvm";
+  networking.hostName = "ozpc";
   networking.networkmanager.enable = true;
 
   # locale and time
@@ -95,7 +95,6 @@
   # services
   services.printing.enable = true;
   services.openssh.enable = true;
-  services.qemuGuest.enable = true;
 
   # misc bits
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
