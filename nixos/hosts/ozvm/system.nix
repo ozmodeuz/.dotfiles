@@ -81,12 +81,20 @@
     curl
     git
     jdk
+    nvd
     plymouth
+    tailscale
     vim
     wget
   ];
 
-  # services
+  # tailscale
+  services.tailscale = {
+    enable = true;
+    extraUpFlags = "--operator=oz";
+  };
+
+  # other services
   services.printing.enable = true;
   services.openssh.enable = true;
   services.qemuGuest.enable = true;
