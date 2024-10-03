@@ -9,6 +9,7 @@ with lib.hm.gvariant;
   ];
 
   home.file.".config/gnome-shell/gnome-shell-light.css".source = ./overlays/gnome-shell-light.css;
+  home.file.".local/share/backgrounds/trans_wallpaper_1.png".source = ../wallpapers/trans_wallpaper_1.png;
 
   home.packages = with pkgs; [
 
@@ -31,8 +32,8 @@ with lib.hm.gvariant;
     "org/gnome/desktop/background" = {
       color-shading-type = "solid";
       picture-options = "zoom";
-      picture-uri = "file:///home/oz/.local/share/backgrounds/2024-09-26-22-07-33-Trans%20Wallpaper%201.png";
-      picture-uri-dark = "file:///home/oz/.local/share/backgrounds/2024-09-26-22-07-33-Trans%20Wallpaper%201.png";
+      picture-uri = "file:///home/oz/.local/share/backgrounds/trans_wallpaper_1.png";
+      picture-uri-dark = "file:///home/oz/.local/share/backgrounds/trans_wallpaper_1.png";
       primary-color = "#000000000000";
       secondary-color = "#000000000000";
     };
