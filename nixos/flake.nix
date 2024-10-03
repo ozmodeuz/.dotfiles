@@ -20,7 +20,7 @@
             inherit system;
             config.allowUnfree = true;
         };
-        profile = "cinnamon"; # gnome, plasma, cinnamon
+        profile = "plasma"; # gnome, plasma, cinnamon
     in {
         nixosConfigurations = {
             ozpc = lib.nixosSystem {
