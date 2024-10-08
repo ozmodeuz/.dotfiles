@@ -8,7 +8,7 @@
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
+    outputs = { self, home-manager, nixpkgs, nixpkgs-unstable, ... }:
     let
         lib = nixpkgs.lib;
         system = "x86_64-linux";
@@ -20,7 +20,7 @@
             inherit system;
             config.allowUnfree = true;
         };
-        profile = "gnome"; # budgie, cinnamon, gnome, plasma
+        desktop = "gnome"; # budgie, cinnamon, gnome, plasma
     in {
         nixosConfigurations = {
             ozpc = lib.nixosSystem {
@@ -28,7 +28,7 @@
                 modules = [
                     ./hosts/ozpc/system.nix
                     ./hosts/ozpc/hardware.nix
-                    ./hosts/ozpc/profiles/${profile}.nix
+                    ./hosts/ozpc/desktops/${desktop}.nix
                 ];
             };
             ozvm = lib.nixosSystem {
@@ -36,7 +36,7 @@
                 modules = [
                     ./hosts/ozvm/system.nix
                     ./hosts/ozvm/hardware.nix
-                    ./hosts/ozvm/profiles/${profile}.nix
+                    ./hosts/ozvm/desktops/${desktop}.nix
                 ];
             };
         };
@@ -48,8 +48,7 @@
                 };
                 modules = [
                     ./users/oz/user.nix
-                    ./users/oz/packages.nix
-                    ./users/oz/profiles/${profile}.nix
+                    ./users/oz/desktops/${desktop}.nix
                 ];
             };
         };

@@ -81,6 +81,7 @@
     curl
     git
     jdk
+    jdk17
     nvd
     plymouth
     tailscale
@@ -103,5 +104,10 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   programs.nix-ld.enable = true;
   system.stateVersion = "24.05"; # Don't change :)
+  
+  /*system.updateCheck = {
+    enable = true;
+    flake = "/home/oz/.dotfiles/.";
+  };*/
 
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstablePkgs, ... }:
 
 {
 
@@ -7,6 +7,34 @@
   home.sessionVariables = {
     EDITOR = "micro";
   };
+  home.packages =
+    (with pkgs; [
+      # packages
+      alacritty
+      coolercontrol.coolercontrol-gui
+      coolercontrol.coolercontrol-liqctld
+      coolercontrol.coolercontrol-ui-data
+      coolercontrol.coolercontrold
+      eyedropper
+      nuclear
+      scribus
+      vscodium
+      # fonts
+      ( nerdfonts.override {
+        fonts = [
+          "0xProto"
+        ];
+      })
+      # themes
+      yaru-theme
+    ])
+
+    ++
+
+    (with unstablePkgs; [
+      _1password
+      _1password-gui
+    ]);
 
   home.stateVersion = "24.05"; # don't change :)
 
@@ -17,6 +45,8 @@
     "aeblfdkhhhdcdjpifhhbdiojplfjncoa" # 1password
     "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
   ];
+
+  programs.firefox.enable = true;
 
   programs.git.enable = true;
   programs.git.userName = "Oz Browning";

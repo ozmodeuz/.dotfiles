@@ -1,31 +1,33 @@
-{ lib, pkgs, ... }:
-
-with lib.hm.gvariant;
+{ config, pkgs, ... }:
 
 {
 
-  imports = [
-    ./overlays/arcmenu.nix
-  ];
+nixpkgs.overlays = [
+  (import ../overlays/gnome/arcmenu.nix)
+  (import ../overlays/gnome/displayswitcher.nix)
+];
 
-  home.file.".config/gnome-shell/gnome-shell-light.css".source = ./overlays/gnome-shell-light.css;
-  home.file.".local/share/backgrounds/trans_wallpaper_1.png".source = ../wallpapers/trans_wallpaper_1.png;
+  home.file."${config.home.homeDirectory}/.config/gnome-shell/gnome-shell-light.css".source = ../themes/gnome-shell-light.css;
+  home.file."${config.home.homeDirectory}/.local/share/backgrounds/trans_wallpaper_1.png".source = ../wallpapers/trans_wallpaper_1.png;
 
   home.packages = with pkgs; [
-
-    # gnome extensions
+    gdm-settings
     gnome-extension-manager
-    gnomeExtensions.arcmenu
-    gnomeExtensions.appindicator
-    gnomeExtensions.dash-to-panel
-    gnomeExtensions.gsconnect
-    gnomeExtensions.media-controls
-    gnomeExtensions.tailscale-qs
-    gnomeExtensions.user-themes-x
-
-    # themes
-    yaru-theme
   ];
+
+  programs.gnome-shell = {
+    enable = true;
+    extensions = with pkgs ; [
+      { package = gnomeExtensions.appindicator; }
+      { package = gnomeExtensions.arcmenu; }
+      { package = gnomeExtensions.dash-to-panel; }
+      { package = gnomeExtensions.display-configuration-switcher; }
+      { package = gnomeExtensions.gsconnect; }
+      { package = gnomeExtensions.media-controls; }
+      { package = gnomeExtensions.tailscale-qs; }
+      { package = gnomeExtensions.user-themes-x; }
+    ];
+  };
 
   dconf.enable = true;
   dconf.settings = {
@@ -73,7 +75,7 @@ with lib.hm.gvariant;
       menu-button-icon = "Distro_Icon";
       multi-monitor = true;
       position-in-panel = "Center";
-      power-options = [ (mkTuple [ 0 true ]) (mkTuple [ 1 true ]) (mkTuple [ 4 true ]) (mkTuple [ 2 true ]) (mkTuple [ 3 true ]) (mkTuple [ 5 false ]) (mkTuple [ 6 false ]) (mkTuple [ 7 false ]) ];
+      power-options = "[ (mkTuple [ 0 true ]) (mkTuple [ 1 true ]) (mkTuple [ 4 true ]) (mkTuple [ 2 true ]) (mkTuple [ 3 true ]) (mkTuple [ 5 false ]) (mkTuple [ 6 false ]) (mkTuple [ 7 false ]) ]";
       prefs-visible-page = 0;
       show-activities-button = true;
       vert-separator = true;
@@ -129,11 +131,26 @@ with lib.hm.gvariant;
       tray-padding = -1;
       window-preview-title-position = "TOP";
     };
+    "org/gnome/shell/extensions/display-configuration-switcher" = {
+      config = ''
+        [('Work', uint32 522154615, 
+          [(0, 0, 1.5, uint32 0, true, [('DP-0', '3840x2160@59.997', @a{sv} {})])], 
+          {'layout-mode': <uint32 3>}, 
+          [('DP-0', 'DEL', 'DELL G3223Q', '6BX70P3'), ('HDMI-0', 'DEL', 'DELL U2520D', 'H4MM923')]
+        ), 
+        ('Personal', 2225729516, 
+          [(0, 0, 1.5, 0, true, [('DP-0', '3840x2160@59.997', {})]), 
+          (5120, 0, 1.25, 0, false, [('HDMI-0', '2560x1440@59.951', {})])], 
+          {'layout-mode': <uint32 3>}, 
+          [('DP-0', 'DEL', 'DELL G3223Q', '6BX70P3'), ('HDMI-0', 'DEL', 'DELL U2520D', 'H4MM923')]
+        )]
+      '';
+    };
     "org/gnome/shell/extensions/mediacontrols" = {
       colored-player-icon = true;
       elements-order = [ "ICON" "CONTROLS" "LABEL" ];
       extension-position = "Left";
-      label-width = mkUint32 0;
+      label-width = "mkUint32 0";
       labels-order = [ "TITLE" "-" "ARTIST" ];
       scroll-labels = false;
       show-control-icons-seek-backward = false;
