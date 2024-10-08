@@ -17,6 +17,7 @@
       coolercontrol.coolercontrold
       eyedropper
       nuclear
+      pika-backup
       scribus
       vscodium
       # fonts
