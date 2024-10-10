@@ -1,15 +1,16 @@
 { config, pkgs, ... }:
+
 {
   # boot loader
   boot = {
-    loader = {
-      grub = {
-        enable = true;
-        device = "/dev/vda";
-        useOSProber = true;
-      };
+    loader.grub = {
+      enable = true;
+      useOSProber = true;
+      device = "nodev";
+      efiSupport = true;
     };
     plymouth.enable = true;
+    plymouth.theme = "breeze";
     consoleLogLevel = 0;
     initrd.verbose = false;
     kernelParams = [
@@ -45,6 +46,7 @@
 
   # window managers
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.xkb = {
     layout = "gb";
     variant = "extd";
@@ -73,25 +75,48 @@
     };
   };
 
+  # environment variables
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
+
   # packages
   environment.systemPackages = with pkgs; [
     btop
     cloudflared
     curl
+    flatpak
     git
+    home-manager
     jdk
+    jdk17
+    nvd
     plymouth
+    tailscale
     vim
     wget
   ];
 
-  # services
-  services.printing.enable = true;
+  # tailscale
+  services.tailscale = {
+    enable = true;
+    extraUpFlags = "--operator=oz";
+  };
+
+  # other services
+  services.flatpak.enable = true;
   services.openssh.enable = true;
+  services.printing.enable = true;
+  services.qemuGuest.enable = true;
 
   # misc bits
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   programs.nix-ld.enable = true;
   system.stateVersion = "24.05"; # Don't change :)
+  
+  /*system.updateCheck = {
+    enable = true;
+    flake = "/home/oz/.dotfiles/.";
+  };*/
 
 }

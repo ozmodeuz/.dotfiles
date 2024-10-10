@@ -13,7 +13,13 @@ nixpkgs.overlays = [
   home.packages = with pkgs; [
     gdm-settings
     gnome-extension-manager
+    gnome-software
   ];
+
+  xdg.desktopEntries.Chromium.name = "Chromium";
+  xdg.desktopEntries.Chromium.exec = "chromium --enable-features=UseOzonePlatform --ozone-platform=auto --force-device-scale-factor=2 --disable-features=WaylandFractionalScaleV1 %U";
+  xdg.desktopEntries.VSCodium.name = "VSCodium";
+  xdg.desktopEntries.VSCodium.exec = "VSCodium --new-window --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations %F";
 
   programs.gnome-shell = {
     enable = true;
@@ -44,7 +50,7 @@ nixpkgs.overlays = [
     };
     "org/gnome/mutter" = {
       center-new-windows = true;
-      experimental-features = [ "x11-randr-fractional-scaling" ];
+      experimental-features = "['scale-monitor-framebuffer']";
       overlay-key = "Super_L";
     };
     "org/gnome/nautilus/list-view" = {
@@ -60,7 +66,7 @@ nixpkgs.overlays = [
       disable-user-extensions = false;
       disabled-extensions = [ "background-logo@fedorahosted.org" "apps-menu@gnome-shell-extensions.gcampax.github.com" "user-theme@gnome-shell-extensions.gcampax.github.com" "HideItems@fablevi.github.io" "blur-my-shell@aunetx" "appindicatorsupport@rgcjonas.gmail.com" "trayIconsReloaded@selfmade.pl" "status-icons@gnome-shell-extensions.gcampax.github.com" ];
       enabled-extensions = [ "gsconnect@andyholmes.github.io" "dash-to-panel@jderose9.github.com" "arcmenu@arcmenu.com" "user-theme-x@tuberry.github.io" "mediacontrols@cliffniff.github.com" "arch-update@RaphaelRochet" "display-configuration-switcher@knokelmaat.gitlab.com" "rounded-window-corners@fxgn" "tailscale@joaophi.github.com" "dim-background-windows@stephane-13.github.com" ];
-      favorite-apps = [ "org.gnome.Nautilus.desktop" "Alacritty.desktop" "chromium-browser.desktop" "thunderbird.desktop" "codium.desktop" "1password.desktop" "Affinity Photo 2.desktop" ];
+      favorite-apps = [ "org.gnome.Nautilus.desktop" "Alacritty.desktop" "chromium-browser.desktop" "thunderbird.desktop" "VSCodium.desktop" "1password.desktop" "Affinity Photo 2.desktop" ];
     };
     "org/gnome/shell/extensions/arcmenu" = {
       all-apps-button-action = "All_Programs";

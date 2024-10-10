@@ -2,8 +2,8 @@
     description = "ozflake";
     
     inputs = {
-        nixpkgs.url = "nixpkgs/nixpkgs-unstable";
-        nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
+        nixpkgs.url = "nixpkgs/nixos-24.05";
+        nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
         home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
     };
