@@ -1,33 +1,52 @@
-{ config, pkgs, lib, ... }:
+# Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
+{ lib, ... }:
+
+with lib.hm.gvariant;
 
 {
+  dconf.settings = {
+    "com/mattjakeman/ExtensionManager" = {
+      height = 1153;
+      last-used-version = "0.5.1";
+    };
 
+    "org/gnome/Console" = {
+      last-window-maximised = false;
+      last-window-size = mkTuple [ 652 480 ];
+    };
 
-  home.file."${config.home.homeDirectory}/.config/gnome-shell/gnome-shell-light.css".source = ../themes/gnome-shell-light.css;
-  home.file."${config.home.homeDirectory}/.local/share/backgrounds/trans_wallpaper_1.png".source = ../wallpapers/trans_wallpaper_1.png;
+    "org/gnome/control-center" = {
+      last-panel = "display";
+      window-state = mkTuple [ 980 640 false ];
+    };
 
-  home.packages = with pkgs; [
-    dconf2nix
-    gnome-extension-manager
-    gnome-software
-  ];
+    "org/gnome/desktop/a11y/applications" = {
+      screen-reader-enabled = false;
+    };
 
-  programs.gnome-shell = {
-    enable = true;
-    extensions = with pkgs; [
-      { package = gnomeExtensions.appindicator; }
-      { package = gnomeExtensions.arcmenu; }
-      { package = gnomeExtensions.dash-to-panel; }
-      { package = gnomeExtensions.display-configuration-switcher; }
-      { package = gnomeExtensions.gsconnect; }
-      { package = gnomeExtensions.media-controls; }
-      { package = gnomeExtensions.tailscale-qs; }
-      { package = gnomeExtensions.user-themes-x; }
-    ];
-  };
+    "org/gnome/desktop/app-folders" = {
+      folder-children = [ "Utilities" "YaST" "Pardus" ];
+    };
 
-  dconf.enable = true;
-  dconf.settings = with lib.hm.gvariant; {
+    "org/gnome/desktop/app-folders/folders/Pardus" = {
+      categories = [ "X-Pardus-Apps" ];
+      name = "X-Pardus-Apps.directory";
+      translate = true;
+    };
+
+    "org/gnome/desktop/app-folders/folders/Utilities" = {
+      apps = [ "gnome-abrt.desktop" "gnome-system-log.desktop" "nm-connection-editor.desktop" "org.gnome.baobab.desktop" "org.gnome.Connections.desktop" "org.gnome.DejaDup.desktop" "org.gnome.Dictionary.desktop" "org.gnome.DiskUtility.desktop" "org.gnome.Evince.desktop" "org.gnome.FileRoller.desktop" "org.gnome.fonts.desktop" "org.gnome.Loupe.desktop" "org.gnome.seahorse.Application.desktop" "org.gnome.tweaks.desktop" "org.gnome.Usage.desktop" "vinagre.desktop" ];
+      categories = [ "X-GNOME-Utilities" ];
+      name = "X-GNOME-Utilities.directory";
+      translate = true;
+    };
+
+    "org/gnome/desktop/app-folders/folders/YaST" = {
+      categories = [ "X-SuSE-YaST" ];
+      name = "suse-yast.directory";
+      translate = true;
+    };
+
     "org/gnome/desktop/background" = {
       color-shading-type = "solid";
       picture-options = "zoom";
@@ -55,12 +74,47 @@
       toolbar-style = "text";
     };
 
+    "org/gnome/desktop/notifications" = {
+      application-children = [ "codium-url-handler" "codium" ];
+    };
+
+    "org/gnome/desktop/notifications/application/codium-url-handler" = {
+      application-id = "codium-url-handler.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/codium" = {
+      application-id = "codium.desktop";
+    };
+
     "org/gnome/desktop/sound" = {
       theme-name = "ocean";
-    }; 
+    };
 
     "org/gnome/desktop/wm/preferences" = {
       button-layout = ":minimize,maximize,close";
+    };
+
+    "org/gnome/epiphany" = {
+      ask-for-default = false;
+    };
+
+    "org/gnome/evolution-data-server" = {
+      migrated = true;
+    };
+
+    "org/gnome/gnome-system-monitor" = {
+      show-dependencies = false;
+      show-whose-processes = "user";
+    };
+
+    "org/gnome/gnome-system-monitor/disktreenew" = {
+      col-6-visible = true;
+      col-6-width = 0;
+    };
+
+    "org/gnome/gnome-system-monitor/proctree" = {
+      col-0-visible = true;
+      col-0-width = 404;
     };
 
     "org/gnome/mutter" = {
@@ -79,12 +133,17 @@
       migrated-gtk-settings = true;
       search-filter-time-type = "last_modified";
     };
-    
+
+    "org/gnome/nautilus/window-state" = {
+      initial-size = mkTuple [ 890 550 ];
+    };
+
     "org/gnome/shell" = {
+      command-history = [ "lg" ];
       disable-user-extensions = false;
       disabled-extensions = [ "background-logo@fedorahosted.org" "apps-menu@gnome-shell-extensions.gcampax.github.com" "user-theme@gnome-shell-extensions.gcampax.github.com" "HideItems@fablevi.github.io" "blur-my-shell@aunetx" "appindicatorsupport@rgcjonas.gmail.com" "trayIconsReloaded@selfmade.pl" "status-icons@gnome-shell-extensions.gcampax.github.com" ];
-      enabled-extensions = [ "gsconnect@andyholmes.github.io" "dash-to-panel@jderose9.github.com" "arcmenu@arcmenu.com" "user-theme-x@tuberry.github.io" "mediacontrols@cliffniff.github.com" "arch-update@RaphaelRochet" "display-configuration-switcher@knokelmaat.gitlab.com" "rounded-window-corners@fxgn" "tailscale@joaophi.github.com" "dim-background-windows@stephane-13.github.com" "appindicatorsupport@rgcjonas.gmail.com" "arcmenu@arcmenu.com" "dash-to-panel@jderose9.github.com" "gsconnect@andyholmes.github.io" "mediacontrols@cliffniff.github.com" "tailscale@joaophi.github.com" "user-theme-x@tuberry.github.io" ];
-      favorite-apps = [ "org.gnome.Nautilus.desktop" "Alacritty.desktop" "chromium-browser.desktop" "microsoft-edge.desktop" "codium.desktop" "1password.desktop" ];
+      enabled-extensions = [ "gsconnect@andyholmes.github.io" "dash-to-panel@jderose9.github.com" "arcmenu@arcmenu.com" "user-theme-x@tuberry.github.io" "mediacontrols@cliffniff.github.com" "arch-update@RaphaelRochet" "display-configuration-switcher@knokelmaat.gitlab.com" "rounded-window-corners@fxgn" "tailscale@joaophi.github.com" "dim-background-windows@stephane-13.github.com" "appindicatorsupport@rgcjonas.gmail.com" "arcmenu@arcmenu.com" "dash-to-panel@jderose9.github.com" "gsconnect@andyholmes.github.io" "mediacontrols@cliffniff.github.com" "tailscale@joaophi.github.com" "user-theme-x@tuberry.github.io" "appindicatorsupport@rgcjonas.gmail.com" "arcmenu@arcmenu.com" "dash-to-panel@jderose9.github.com" "display-configuration-switcher@knokelmaat.gitlab.com" "gsconnect@andyholmes.github.io" "mediacontrols@cliffniff.github.com" "tailscale@joaophi.github.com" "user-theme-x@tuberry.github.io" ];
+      favorite-apps = [ "org.gnome.Nautilus.desktop" "Alacritty.desktop" "chromium-browser.desktop" "codium.desktop" "1password.desktop" ];
       welcome-dialog-last-shown-version = "46.2";
     };
 
@@ -103,6 +162,7 @@
       position-in-panel = "Center";
       power-options = [ (mkTuple [ 0 true ]) (mkTuple [ 1 true ]) (mkTuple [ 4 true ]) (mkTuple [ 2 true ]) (mkTuple [ 3 true ]) (mkTuple [ 5 false ]) (mkTuple [ 6 false ]) (mkTuple [ 7 false ]) ];
       prefs-visible-page = 0;
+      search-entry-border-radius = mkTuple [ true 25 ];
       show-activities-button = true;
       vert-separator = true;
     };
@@ -131,16 +191,16 @@
       leftbox-padding = -1;
       middle-click-action = "LAUNCH";
       panel-anchors = ''
-       {"0":"MIDDLE","1":"MIDDLE"}
+        {"0":"MIDDLE","1":"MIDDLE"}\n
       '';
       panel-element-positions = ''
-        {"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"centerMonitor"},{"element":"taskbar","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}],"1":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"centerMonitor"},{"element":"taskbar","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}
+        {"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"centerMonitor"},{"element":"taskbar","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}],"1":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"centerMonitor"},{"element":"taskbar","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}\n
       '';
       panel-lengths = ''
-        {"0":100,"1":100}
+        {"0":100,"1":100}\n
       '';
       panel-sizes = ''
-        {"0":48,"1":48}
+        {"0":48,"1":48}\n
       '';
       primary-monitor = 0;
       shift-click-action = "LAUNCH";
@@ -192,6 +252,15 @@
       x-shell = "Yaru-magenta";
       x-shell-night = "Yaru-magenta-dark";
       x-stylesheet = true;
+    };
+
+    "org/gnome/shell/world-clocks" = {
+      locations = [];
+    };
+
+    "org/gnome/software" = {
+      check-timestamp = mkInt64 1728595133;
+      first-run = false;
     };
 
     "org/gtk/settings/file-chooser" = {

@@ -3,26 +3,15 @@
 {
   # boot loader
   boot = {
-    loader.grub = {
-      enable = true;
-      useOSProber = true;
-      device = "nodev";
-      efiSupport = true;
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      timeout = 0;
     };
-    plymouth.enable = true;
-    plymouth.theme = "breeze";
-    consoleLogLevel = 0;
-    initrd.verbose = false;
-    kernelParams = [
-      "quiet"
-      "splash"
-      "boot.shell_on_fail"
-      "loglevel=3"
-      "rd.systemd.show_status=false"
-      "rd.udev.log_level=3"
-      "udev.log_priority=3"
-    ];
+    kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
   };
+
+  nixpkgs.config.allowUnfree = true;
 
   # networking
   networking.hostName = "ozpc";
@@ -49,7 +38,7 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.xkb = {
     layout = "gb";
-    variant = "extd";
+    variant = "";
   };
   # services.xserver.libinput.enable = true;
 
@@ -85,6 +74,7 @@
     btop
     cloudflared
     curl
+    firefox
     flatpak
     git
     home-manager
@@ -114,9 +104,16 @@
   programs.nix-ld.enable = true;
   system.stateVersion = "24.05"; # Don't change :)
   
-  /*system.updateCheck = {
+  system.autoUpgrade = {
     enable = true;
-    flake = "/home/oz/.dotfiles/.";
-  };*/
+    operation = "boot";
+    flake = "path:/home/oz/.dotfiles";
+    flags = [
+      "--update-input"
+      "nixpkgs"
+      "-L" # print build logs
+    ];
+    dates = "12:00";
+  };
 
 }
